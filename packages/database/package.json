@@ -17,5 +17,8 @@
     "db:migrate": "prisma db push --skip-generate",
     "db:stop": "docker compose down",
     "db:seed": "tsx ./src/seed.ts"
+  },
+  "exports": {
+    ".": "./src/index.ts"
   }
 }
