@@ -1,0 +1,12 @@
+# Use postgres/example user/password credentials
+services:
+
+  db:
+    image: postgres:16.4
+    restart: always
+    env_file: .env
+
+   
+    ports:
+      - "5433:5432"
+
