@@ -24,6 +24,13 @@ export class ProductsService {
   }
 
   async deleteProduct(id: number) {
-    return prisma.product.delete({ where: { id } });
-  }
+    await prisma.variant.deleteMany({
+      where: { productId: id },
+    });
+  
+    // Then delete the Product
+    return prisma.product.delete({
+      where: { id },
+    });
+    }
 }
