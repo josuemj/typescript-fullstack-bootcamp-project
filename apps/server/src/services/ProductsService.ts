@@ -7,7 +7,8 @@ export class ProductsService {
 
     return products.map((product) => ({
       name: product.name,
-      description: product.description ?? ''
+      description: product.description ?? '',
+      
     }))
   }
 
