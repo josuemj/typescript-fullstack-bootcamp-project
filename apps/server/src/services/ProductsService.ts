@@ -6,8 +6,12 @@ export class ProductsService {
     const products = await prisma.product.findMany();
 
     return products.map((product) => ({
+      id: product.id,
       name: product.name,
-      description: product.description ?? ''
+      description: product.description ?? '',
+      imagen: product.image
+
+      
     }))
   }
 
