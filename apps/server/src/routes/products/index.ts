@@ -14,6 +14,7 @@ export function productsRoute(app: Express): void {
   router.get('/collection/:collectionid', productController.getAllProductsByCollection)
 
 
+
   router.post('/', productController.createProduct);
   router.put('/:id', productController.updateProduct); 
   router.delete('/:id', productController.deleteProduct); 

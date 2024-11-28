@@ -1,5 +1,4 @@
 import { prisma } from "../lib/prismaClient";
-// import { Product } from "../model/Product";
 
 export class ProductsService {
   async getAllProducts() {
@@ -52,5 +51,18 @@ export class ProductsService {
     return prisma.product.delete({
       where: { id },
     });
+    }
+
+    async getAllCollections() {
+      const products = await prisma.product.findMany();
+  
+      return products.map((product) => ({
+        id: product.id,
+        name: product.name,
+        description: product.description ?? '',
+        image: product.image,
+        price : product.price,
+        collectionid: product.collectionid
+      }))
     }
 }

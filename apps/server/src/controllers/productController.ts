@@ -40,4 +40,9 @@ export class ProductController {
     const products = await productService.getAllProductsByCollection(collectionid);
     res.json(products);
   }
+
+  async getAllCollections(req: Request, res: Response) {
+    const products = await productService.getAllCollections();
+    res.json(products);
+  }
 }
