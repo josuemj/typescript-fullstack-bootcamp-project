@@ -15,6 +15,22 @@ export class ProductsService {
     }))
   }
 
+  async getAllProductsByCollection(collectionId: number) {
+    const products = await prisma.product.findMany({
+      where: {
+        collectionid: collectionId,
+      },
+    });
+    return products.map((product) => ({
+      id: product.id,
+      name: product.name,
+      description: product.description ?? '',
+      image: product.image,
+      price : product.price,
+      collectionid: product.collectionid
+    }))
+  }
+
   async getProductById(id: number) {
     return prisma.product.findUnique({ where: { id } });
   }

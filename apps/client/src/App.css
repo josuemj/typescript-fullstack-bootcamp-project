@@ -1,18 +1,12 @@
 .app-container {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    background-color: #ffffff;
-    justify-content: center;
-    align-items: center;
-  }
+  display: flex;
+  flex-direction: column;
+  /* min-height: 100vh; */
+  background-color: #ffffff;
+}
 
-  .main-content {
-    width: 100vw;
-    display: flex;
-    flex: 1;
-    padding: 2rem;
-    background-color: #3d8abd;
-    align-items: center;
-    justify-content: center;
-  }
+.main-content {
+  display: flex;
+  flex: 1;
+  background-color: #3d8abd;
+}

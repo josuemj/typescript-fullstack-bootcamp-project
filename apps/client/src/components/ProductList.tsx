@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import { ProductCard } from './ProductCard'
-
+import './ProductList..css'
 type Product = {
   id: number
   description: string
@@ -30,9 +30,7 @@ export const ProductList = () => {
   console.log(data)
 
   return (
-    <div
-      className="product-list"
-    >
+    <div className="productList">
       {data.map((item) => (
         <ProductCard
           id={item.id}
@@ -40,7 +38,6 @@ export const ProductList = () => {
           name={item.name}
           image={item.image}
           price={item.price}
-
         />
       ))}
     </div>

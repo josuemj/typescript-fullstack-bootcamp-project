@@ -10,7 +10,7 @@ import './App.css'
 
 import { ProductList } from './components/ProductList'
 import { NavBar } from './components/NavBar'
-import { AdsContainer } from './components/ad/AdsContainer'
+import { SideBar } from './components/sidebar/SideBar'
 
 const queryClient = new QueryClient()
 
@@ -19,10 +19,8 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <div className="app-container">
         <NavBar />
-        <AdsContainer />
-        <h1>Store</h1>
-
         <main className="main-content">
+          <SideBar />
           <ProductList />
         </main>
       </div>

@@ -33,4 +33,11 @@ export class ProductController {
     await productService.deleteProduct(id);
     res.json({ message: 'Product deleted successfully' });
   }
+
+  async getAllProductsByCollection(req: Request, res: Response) {
+    const collectionid  = parseInt(req.params.collectionid); // Extract collection from the route parameter
+
+    const products = await productService.getAllProductsByCollection(collectionid);
+    res.json(products);
+  }
 }

@@ -12,13 +12,11 @@ export const ProductCard = (product: ProductCardProps) => {
   return (
     <>
       <div key={product.id} className="productCard">
-      <h1>{product.name}</h1>
+        <img src={product.image} className="productImage"></img>
 
-        <img src={product.image}></img>
-        <span style={{fontSize: "10px"}}>{product.description}</span>
-        <strong>
-            {product.price}
-        </strong>
+        <h1 className="productTitle">{product.name}</h1>
+        <h3 className="cardPrice">${product.price}</h3>
+        <p className='cardDescription'>{product.description}</p>
       </div>
     </>
   )
