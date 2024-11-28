@@ -1,0 +1,18 @@
+.app-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #ffffff;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .main-content {
+    width: 100vw;
+    display: flex;
+    flex: 1;
+    padding: 2rem;
+    background-color: #3d8abd;
+    align-items: center;
+    justify-content: center;
+  }

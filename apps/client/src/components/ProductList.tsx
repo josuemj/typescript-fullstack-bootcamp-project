@@ -31,8 +31,7 @@ export const ProductList = () => {
 
   return (
     <div
-      className="
-      grid gap-4 grid-cols-[repeat(auto-fill,_minmax(250px,1fr))]"
+      className="product-list"
     >
       {data.map((item) => (
         <ProductCard

@@ -1,0 +1,18 @@
+/* Ads container background */
+.ads-container {
+    height: 250px; /* Adjust the height based on your design */
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 1.5rem;
+    text-align: center;
+    font-weight: bold;
+  
+    background-image: url('https://images5.alphacoders.com/137/thumb-1920-1376859.png'); /* Ensure the path is correct */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  

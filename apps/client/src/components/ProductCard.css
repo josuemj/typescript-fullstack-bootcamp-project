@@ -1,5 +1,8 @@
 .productCard {
+    width: 300px;
+    height: 600px;
   display: flex;
+  
   flex-direction: column;
   background-color: #ecececd5;
   border-radius: 20px;

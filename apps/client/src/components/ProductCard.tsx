@@ -15,7 +15,7 @@ export const ProductCard = (product: ProductCardProps) => {
       <h1>{product.name}</h1>
 
         <img src={product.image}></img>
-        <span>{product.description}</span>
+        <span style={{fontSize: "10px"}}>{product.description}</span>
         <strong>
             {product.price}
         </strong>
