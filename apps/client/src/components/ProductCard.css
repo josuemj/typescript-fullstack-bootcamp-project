@@ -1,0 +1,21 @@
+.productCard {
+  display: flex;
+  flex-direction: column;
+  background-color: #ecececd5;
+  border-radius: 20px;
+  padding: 15px;
+  border: 2px solid rgba(255, 255, 255, 0.459);
+  transition: background-color 0.2 ease;
+  transition: transform 0.2s ease;
+  transition:
+    border 0,
+    2s ease;
+}
+
+.productCard:hover {
+  background-color: rgb(255, 255, 255);
+  transform: scale(
+    1.1
+  ); 
+  border: solid rgba(0, 0, 0, 0.219);
+}

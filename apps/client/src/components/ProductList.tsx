@@ -1,9 +1,12 @@
 import { useQuery } from '@tanstack/react-query'
+import { ProductCard } from './ProductCard'
+
 type Product = {
   id: number
   description: string
   name: string
-  imagen: string
+  image: string
+  price: number
 }
 export const ProductList = () => {
   const { status, data, error } = useQuery<Product[]>({
@@ -23,20 +26,23 @@ export const ProductList = () => {
     return <span>Error</span>
   }
 
-  console.log(data[0].imagen)
+  console.log(data[0].image)
   console.log(data)
 
   return (
-    <div>
+    <div
+      className="
+      grid gap-4 grid-cols-[repeat(auto-fill,_minmax(250px,1fr))]"
+    >
       {data.map((item) => (
-        <div key={item.id}>
-          <img
-            src={item.imagen}
-      
-          ></img>
-          <h1>{item.name}</h1>
-          <span>{item.description}</span>
-        </div>
+        <ProductCard
+          id={item.id}
+          description={item.description}
+          name={item.name}
+          image={item.image}
+          price={item.price}
+
+        />
       ))}
     </div>
   )

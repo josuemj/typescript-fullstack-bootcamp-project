@@ -9,9 +9,9 @@ export class ProductsService {
       id: product.id,
       name: product.name,
       description: product.description ?? '',
-      imagen: product.image
-
-      
+      image: product.image,
+      price : product.price,
+      collectionid: product.collectionid
     }))
   }
 
@@ -29,7 +29,7 @@ export class ProductsService {
 
   async deleteProduct(id: number) {
     await prisma.variant.deleteMany({
-      where: { productId: id },
+      where: {  id: id },
     });
   
     // Then delete the Product

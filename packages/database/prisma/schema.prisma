@@ -14,58 +14,35 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Product {
-  id Int @id @default(autoincrement())
-  name String 
-  description String?
-  image String?
-  variants Variant[]
-  options Option[]
-  collections Collection[]
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+model Collections {
+  collectionid Int       @id @default(autoincrement())
+  name         String
+  description  String?
+  products     Product[]
+  variants     Variant[]
 }
 
-model Collection {
-  id Int @id @default(autoincrement())
-  name String
+model Product {
+  id          Int     @id @default(autoincrement())
+  name        String
   description String?
-  products Product[]
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  image       String?
+
+  price        Float
+  collectionid Int
+  collection   Collections @relation(fields: [collectionid], references: [collectionid])
+
+  variants Variant[]
 }
 
 model Variant {
-  id Int @id @default(autoincrement())
-  product Product @relation(fields: [productId], references: [id])
-  productId Int
-  name String
-  description String?
-  image String?
-  sku String
-  price Int
-  stock Int
-  optionValues OptionValue[]
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
+  id                Int     @id @default(autoincrement())
+  parent_product_id Int
+  variant_name      String
+  price             Float
+  image             String?
+  collectionid      Int
 
-model Option {
-  id Int @id @default(autoincrement())
-  product Product @relation(fields: [productId], references: [id])
-  productId Int
-  name String
-  values OptionValue[]
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
-model OptionValue {
-  id Int @id @default(autoincrement())
-  option Option @relation(fields: [optionId], references: [id])
-  optionId Int
-  value String
-  variants Variant[]
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  parent_product Product     @relation(fields: [parent_product_id], references: [id])
+  collection     Collections @relation(fields: [collectionid], references: [collectionid])
 }
