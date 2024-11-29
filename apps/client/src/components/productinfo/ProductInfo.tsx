@@ -1,6 +1,7 @@
 import './ProductInfo.css'
 import { useLocation, useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
+import { VariantList } from './VariantList'
 type ProductCardProps = {
   id: number
   description: string
@@ -22,12 +23,12 @@ export const ProductInfo = () => {
       fetch(`http://localhost:5001/api/products/${id}`)
         .then((res) => res.json())
         .then((data) => setProduct(data))
-        .catch((err) => console.error('Error fetching product:', err));
+        .catch((err) => console.error('Error fetching product:', err))
     }
-  }, [id, product]);
+  }, [id, product])
 
   if (!product) {
-    return <div>Loading product details...</div>;
+    return <div>Loading product details...</div>
   }
   return (
     <>
@@ -41,7 +42,7 @@ export const ProductInfo = () => {
             <p>{product.description}</p>
           </div>
         </div>
-        <div className="productVariants"></div>
+        <VariantList parent_product_id={product.id} />
       </div>
     </>
   )
