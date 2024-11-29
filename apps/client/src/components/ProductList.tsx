@@ -8,16 +8,28 @@ type Product = {
   image: string
   price: number
 }
-export const ProductList = () => {
-  const { status, data, error } = useQuery<Product[]>({
-    queryKey: ['products'],
-    queryFn: () => {
-      return fetch('http://localhost:5001/api/products/').then((result) =>
-        result.json(),
-      )
-    },
-  })
 
+type ProductListProps = {
+  collectionid : number | string
+}
+export const ProductList = ({collectionid} : ProductListProps) => {
+
+  //This fetches all products when collectionid = 'all '
+  // this fetcehd a product by id http://localhost:5001/api/products/1 (id = 1) this will use the
+  const route =
+    collectionid === 'all'
+      ? 'http://localhost:5001/api/products'
+      : `http://localhost:5001/api/products/collection/${collectionid}`;
+
+  console.log(`Fetching from route: ${route}`);
+
+  const { status, data, error } = useQuery<Product[]>(
+    ['products', collectionid], // Include collectionid in the queryKey
+    () => fetch(route).then((res) => res.json()), // Fetch function
+    {
+      enabled: !!collectionid, // Ensure query is only run when collectionid is defined
+    }
+  );
   if (status === 'loading') {
     return <span>Loading...</span>
   }
@@ -26,7 +38,6 @@ export const ProductList = () => {
     return <span>Error</span>
   }
 
-  console.log(data[0].image)
   console.log(data)
 
   return (

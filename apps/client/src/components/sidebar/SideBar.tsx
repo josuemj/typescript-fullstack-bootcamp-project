@@ -1,12 +1,21 @@
 import './SideBar.css'
 import { CollectionsDropDown } from './CollectionsDropDown'
 import { SortDropDown } from './SortDropDown'
-export const SideBar = () => {
+
+type SideBarProps = {
+  collections: [] | any
+  onCollectionChange: (collectionId: number | string) => void
+}
+
+export const SideBar = ({collections, onCollectionChange} : SideBarProps) => {
   return (
     <div className="sideBar">
       <h3>Menu</h3>
       <h3>Show</h3>
-      <CollectionsDropDown />
+      <CollectionsDropDown
+        CollectionsFetch={collections}
+        onChange={onCollectionChange}
+      />
       <h3>Sort</h3>
       <SortDropDown />
     </div>
