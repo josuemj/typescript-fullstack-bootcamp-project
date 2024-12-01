@@ -1,6 +1,7 @@
 import './VariantList.css';
 import { useQuery } from '@tanstack/react-query';
 import { ProductCard } from '../ProductCard';
+import { VariantCard } from '../variantinfo/VariantCard';
 
 type Variant = {
   id: number;
@@ -38,11 +39,11 @@ export const VariantList = ({ parent_product_id }: VariantListProps) => {
 
   return (
     <div className="productVariants">
-      {data.map((item) => (
-        <ProductCard
+      {
+      data.map((item) => (
+        <VariantCard
           key={item.id}
           id={item.id}
-          description=""
           name={item.variant_name}
           image={item.image}
           price={item.price}

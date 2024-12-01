@@ -14,7 +14,7 @@ import { ProductList } from './components/ProductList'
 import { NavBar } from './components/NavBar'
 import { SideBar } from './components/sidebar/SideBar'
 import { ProductInfo } from './components/productinfo/ProductInfo'
-const queryClient = new QueryClient()
+import { VariantInfo } from './components/variantinfo/VariantInfo'
 
 type Collection = {
   collectionid: number
@@ -23,7 +23,9 @@ type Collection = {
 }
 
 function App() {
-  const [selectedCollectionId, setSelectedCollectionId] = useState<number | string>('all')
+  const [selectedCollectionId, setSelectedCollectionId] = useState<
+    number | string
+  >('all')
 
   const handleCollectionChange = (collectionId: number | string) => {
     setSelectedCollectionId(collectionId) // Update selected collection ID
@@ -48,30 +50,24 @@ function App() {
 
   return (
     <Router>
-      {/* <div className="app-container">
-        <NavBar />
-        <main className="main-content">
-          <SideBar
-            collections={data}
-            onCollectionChange={handleCollectionChange}
-          />
-          <ProductList collectionid={selectedCollectionId} />
-        </main>
-      </div> */}
       <Routes>
-        <Route path="/" element={
-          <div className="app-container">
-          <NavBar />
-          <main className="main-content">
-            <SideBar
-              collections={data}
-              onCollectionChange={handleCollectionChange}
-            />
-            <ProductList collectionid={selectedCollectionId} />
-          </main>
-        </div>
-        } />
-        <Route path="/product/:id" element={<ProductInfo />} /> Dynamic route for product details
+        <Route
+          path="/"
+          element={
+            <div className="app-container">
+              <NavBar />
+              <main className="main-content">
+                <SideBar
+                  collections={data}
+                  onCollectionChange={handleCollectionChange}
+                />
+                <ProductList collectionid={selectedCollectionId} />
+              </main>
+            </div>
+          }
+        />
+        <Route path="/product/:id" element={<ProductInfo />} />
+        <Route path="/variant/:id" element={<VariantInfo />} />
       </Routes>
     </Router>
   )
