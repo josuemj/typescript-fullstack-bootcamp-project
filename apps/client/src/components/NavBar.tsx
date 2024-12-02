@@ -32,6 +32,7 @@ export const NavBar = ({ onSearch, onBack }: NavBarProps) => {
         </Link>
         <div className="navbar-search">
           <input
+          
             type="text"
             placeholder="Search products..."
             className="search-input"
