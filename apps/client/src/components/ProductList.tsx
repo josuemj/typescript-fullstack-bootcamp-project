@@ -10,29 +10,36 @@ type Product = {
 }
 
 type ProductListProps = {
-  collectionid: number | string
-  searchQuery?: string // Optional search query
-}
+  collectionid: number | string;
+  searchQuery?: string; // Optional search query
+  sortOrder: string; // Sort order: 'asc' | 'desc' | 'default'
+};
+
 
 export const ProductList = ({
   collectionid,
   searchQuery,
+  sortOrder,
+
 }: ProductListProps) => {
   const route = searchQuery
-    ? `http://localhost:5001/api/products/search/${encodeURIComponent(searchQuery)}`
+    ? `http://localhost:5001/api/products/search/${encodeURIComponent(
+        searchQuery
+      )}`
     : collectionid === 'all'
-      ? 'http://localhost:5001/api/products'
-      : `http://localhost:5001/api/products/collection/${collectionid}`
+    ? `http://localhost:5001/api/products?sort=${sortOrder}`
+    : `http://localhost:5001/api/products/collection/${collectionid}?sort=${sortOrder}`;
+
 
   console.log(`Fetching from route: ${route}`)
 
   const { status, data, error } = useQuery<Product[]>(
-    ['products', collectionid, searchQuery], // Include searchQuery in queryKey
+    ['products', collectionid, searchQuery, sortOrder], // Include sortOrder in queryKey
     () => fetch(route).then((res) => res.json()), // Fetch function
     {
       enabled: !!collectionid || !!searchQuery, // Ensure query runs only when valid inputs exist
-    },
-  )
+    }
+  );
 
   if (status === 'loading') {
     return <span>Loading...</span>

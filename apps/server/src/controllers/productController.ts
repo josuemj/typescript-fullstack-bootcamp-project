@@ -5,8 +5,13 @@ const productService = new ProductsService();
 
 export class ProductController {
   async getAllProducts(req: Request, res: Response) {
-    const products = await productService.getAllProducts();
-    res.json(products);
+    try {
+      const { sort } = req.query; // Extract the sort parameter
+      const products = await productService.getAllProducts(sort as string);
+      res.json(products);
+    } catch (error) {
+      res.status(500).json({ error: 'Failed to fetch products' });
+    }
   }
 
   async searchProduct(req: Request, res: Response) {

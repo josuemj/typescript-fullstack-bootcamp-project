@@ -1,17 +1,24 @@
+import { Prisma } from "../../../../packages/database/prisma/prisma-client";
 import { prisma } from "../lib/prismaClient";
 
 export class ProductsService {
-  async getAllProducts() {
-    const products = await prisma.product.findMany();
+  async getAllProducts(sort?: string) {
+    // Validate the sort parameter
+    const orderBy: Prisma.ProductOrderByWithRelationInput | undefined =
+      sort === 'asc' || sort === 'desc' ? { price: sort } : undefined;
+
+    const products = await prisma.product.findMany({
+      orderBy,
+    });
 
     return products.map((product) => ({
       id: product.id,
       name: product.name,
       description: product.description ?? '',
       image: product.image,
-      price : product.price,
-      collectionid: product.collectionid
-    }))
+      price: product.price,
+      collectionid: product.collectionid,
+    }));
   }
 
   async searchProduct(search: string) {

@@ -3,11 +3,17 @@ import { CollectionsDropDown } from './CollectionsDropDown'
 import { SortDropDown } from './SortDropDown'
 
 type SideBarProps = {
-  collections: [] | any
-  onCollectionChange: (collectionId: number | string) => void
-}
+  collections: [] | any;
+  onCollectionChange: (collectionId: number | string) => void;
+  onSortChange: (sortOrder: string) => void; // Callback for sort order
+};
 
-export const SideBar = ({collections, onCollectionChange} : SideBarProps) => {
+
+export const SideBar = ({
+  collections,
+  onCollectionChange,
+  onSortChange,
+}: SideBarProps) => {
   return (
     <div className="sideBar">
       <h3>Menu</h3>
@@ -17,7 +23,7 @@ export const SideBar = ({collections, onCollectionChange} : SideBarProps) => {
         onChange={onCollectionChange}
       />
       <h3>Sort</h3>
-      <SortDropDown />
+      <SortDropDown onSortChange={onSortChange} />
     </div>
-  )
-}
+  );
+};

@@ -26,6 +26,10 @@ function App() {
   const [searchQuery, setSearchQuery] = useState<string>('')
 
   const [visibleNavVar, setVisibleNavBar] = useState<boolean>(true)
+  const [sortOrder, setSortOrder] = useState<string>('default') // Track selected sort order
+  const handleSortChange = (sortOrder: string) => {
+    setSortOrder(sortOrder) // Update sort order state
+  }
 
   const onBack = () => {
     setVisibleNavBar(true)
@@ -70,12 +74,14 @@ function App() {
           path="/"
           element={
             <div className="app-container">
-              <NavBar onSearch={handleSearch} onBack={onBack}/>
+              <NavBar onSearch={handleSearch} onBack={onBack} />
               <main className="main-content">
                 {visibleNavVar ? (
                   <SideBar
                     collections={data}
                     onCollectionChange={handleCollectionChange}
+                    onSortChange={handleSortChange} // Pass the sort change handler
+
                   />
                 ) : (
                   <></>
@@ -84,6 +90,8 @@ function App() {
                 <ProductList
                   collectionid={selectedCollectionId}
                   searchQuery={searchQuery}
+                  sortOrder={sortOrder} // Pass the sort order
+
                 />
               </main>
             </div>
