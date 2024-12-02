@@ -27,6 +27,11 @@ function App() {
 
   const [visibleNavVar, setVisibleNavBar] = useState<boolean>(true)
 
+  const onBack = () => {
+    setVisibleNavBar(true)
+    setSearchQuery('')
+  }
+
   const handleSearch = (query: string) => {
     console.log(query)
     setSearchQuery(query)
@@ -65,7 +70,7 @@ function App() {
           path="/"
           element={
             <div className="app-container">
-              <NavBar onSearch={handleSearch} />
+              <NavBar onSearch={handleSearch} onBack={onBack}/>
               <main className="main-content">
                 {visibleNavVar ? (
                   <SideBar

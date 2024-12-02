@@ -1,11 +1,13 @@
 import './NavBar.css'
 import { useState } from 'react'
-
+import { Link } from 'react-router-dom'
+import img from './storeIcon.png'
 type NavBarProps = {
   onSearch: (query: string) => void
+  onBack: () => void
 }
 
-export const NavBar = ({ onSearch }: NavBarProps) => {
+export const NavBar = ({ onSearch, onBack }: NavBarProps) => {
   const [inputValue, setInputValue] = useState('') // Local state for input
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -20,6 +22,14 @@ export const NavBar = ({ onSearch }: NavBarProps) => {
   return (
     <nav className="navbar">
       <div className="navbar-container">
+        <Link to="/" className="store-icon-link">
+          <img
+            src={img}
+            alt="Store Icon"
+            className="store-icon"
+            onClick={onBack}
+          />
+        </Link>
         <div className="navbar-search">
           <input
             type="text"
