@@ -10,26 +10,30 @@ type Product = {
 }
 
 type ProductListProps = {
-  collectionid : number | string
+  collectionid: number | string
+  searchQuery?: string // Optional search query
 }
-export const ProductList = ({collectionid} : ProductListProps) => {
 
-  //This fetches all products when collectionid = 'all '
-  // this fetcehd a product by id http://localhost:5001/api/products/1 (id = 1) this will use the
-  const route =
-    collectionid === 'all'
+export const ProductList = ({
+  collectionid,
+  searchQuery,
+}: ProductListProps) => {
+  const route = searchQuery
+    ? `http://localhost:5001/api/products/search/${encodeURIComponent(searchQuery)}`
+    : collectionid === 'all'
       ? 'http://localhost:5001/api/products'
-      : `http://localhost:5001/api/products/collection/${collectionid}`;
+      : `http://localhost:5001/api/products/collection/${collectionid}`
 
-  console.log(`Fetching from route: ${route}`);
+  console.log(`Fetching from route: ${route}`)
 
   const { status, data, error } = useQuery<Product[]>(
-    ['products', collectionid], // Include collectionid in the queryKey
+    ['products', collectionid, searchQuery], // Include searchQuery in queryKey
     () => fetch(route).then((res) => res.json()), // Fetch function
     {
-      enabled: !!collectionid, // Ensure query is only run when collectionid is defined
-    }
-  );
+      enabled: !!collectionid || !!searchQuery, // Ensure query runs only when valid inputs exist
+    },
+  )
+
   if (status === 'loading') {
     return <span>Loading...</span>
   }
@@ -38,12 +42,15 @@ export const ProductList = ({collectionid} : ProductListProps) => {
     return <span>Error</span>
   }
 
-  console.log(data)
+  if (data.length === 0) {
+    return <span>No products found</span>
+  }
 
   return (
     <div className="productList">
       {data.map((item) => (
         <ProductCard
+          key={item.id}
           id={item.id}
           description={item.description}
           name={item.name}

@@ -1,14 +1,22 @@
-import './NavBar.css';
+import './NavBar.css'
+import { useState } from 'react'
 
 type NavBarProps = {
-  onSearch: (query: string) => void;
-};
+  onSearch: (query: string) => void
+}
 
 export const NavBar = ({ onSearch }: NavBarProps) => {
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    onSearch(event.target.value);
-  };
+  const [inputValue, setInputValue] = useState('') // Local state for input
 
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setInputValue(event.target.value) // Update local input value
+  }
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      onSearch(inputValue) // Trigger search with the current input value
+    }
+  }
   return (
     <nav className="navbar">
       <div className="navbar-container">
@@ -17,11 +25,11 @@ export const NavBar = ({ onSearch }: NavBarProps) => {
             type="text"
             placeholder="Search products..."
             className="search-input"
-            onChange={handleInputChange}
+            onChange={handleInputChange} // Update state on input change
+            onKeyDown={handleKeyDown} // Trigger search on Enter key
           />
-          <button className="search-button">Search</button>
         </div>
       </div>
     </nav>
-  );
-};
+  )
+}
