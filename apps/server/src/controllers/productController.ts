@@ -9,6 +9,16 @@ export class ProductController {
     res.json(products);
   }
 
+  async searchProduct(req: Request, res: Response) {
+    try {
+      const search = req.params.search;
+      const products = await productService.searchProduct(search);
+      res.json(products);
+    } catch (error) {
+      res.status(500).json({ error: 'Failed to search products' });
+    }
+  }
+
   async getProductById(req: Request, res: Response) {
     const id = parseInt(req.params.id);
     const product = await productService.getProductById(id);

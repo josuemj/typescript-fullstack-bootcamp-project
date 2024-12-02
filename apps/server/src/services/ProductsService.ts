@@ -14,6 +14,25 @@ export class ProductsService {
     }))
   }
 
+  async searchProduct(search: string) {
+    const products = await prisma.product.findMany({
+      where: {
+        name: {
+          contains: search || '',
+          mode: 'insensitive',
+        },
+      },
+    });
+    return products.map((product) => ({
+      id: product.id,
+      name: product.name,
+      description: product.description ?? '',
+      image: product.image,
+      price: product.price,
+      collectionid: product.collectionid,
+    }));
+  }
+
   async getAllProductsByCollection(collectionId: number) {
     const products = await prisma.product.findMany({
       where: {

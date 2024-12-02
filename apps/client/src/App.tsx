@@ -23,6 +23,15 @@ type Collection = {
 }
 
 function App() {
+  const [searchQuery, setSearchQuery] = useState<string>('');
+
+  const [visibleNavVar, setVisibleNavBar] = useState<boolean>(true);
+  
+  const handleSearch = (query: string) => {
+    setSearchQuery(query);
+    setVisibleNavBar(false)
+  };
+
   const [selectedCollectionId, setSelectedCollectionId] = useState<
     number | string
   >('all')
@@ -55,12 +64,15 @@ function App() {
           path="/"
           element={
             <div className="app-container">
-              <NavBar />
+              <NavBar onSearch={handleSearch}/>
               <main className="main-content">
-                <SideBar
+
+                {visibleNavVar ?  <SideBar
                   collections={data}
                   onCollectionChange={handleCollectionChange}
-                />
+                />: <></>} 
+               
+
                 <ProductList collectionid={selectedCollectionId} />
               </main>
             </div>
