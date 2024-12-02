@@ -11,12 +11,13 @@ export function productsRoute(app: Express): void {
   app.use('/api/products', router);
   router.get('/', productController.getAllProducts);
   router.get('/:id', productController.getProductById);
+  router.get('/collection/:collectionid', productController.getAllProductsByCollection)
+  router.get('/search/:search', productController.searchProduct);
+
 
 
   router.post('/', productController.createProduct);
   router.put('/:id', productController.updateProduct); 
   router.delete('/:id', productController.deleteProduct); 
-
-
   
 }

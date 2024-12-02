@@ -1,19 +1,45 @@
 import { useQuery } from '@tanstack/react-query'
+import { ProductCard } from './ProductCard'
+import './ProductList..css'
 type Product = {
   id: number
   description: string
   name: string
-  imagen: string
+  image: string
+  price: number
 }
-export const ProductList = () => {
-  const { status, data, error } = useQuery<Product[]>({
-    queryKey: ['products'],
-    queryFn: () => {
-      return fetch('http://localhost:5001/api/products/').then((result) =>
-        result.json(),
-      )
-    },
-  })
+
+type ProductListProps = {
+  collectionid: number | string;
+  searchQuery?: string; // Optional search query
+  sortOrder: string; // Sort order: 'asc' | 'desc' | 'default'
+};
+
+
+export const ProductList = ({
+  collectionid,
+  searchQuery,
+  sortOrder,
+
+}: ProductListProps) => {
+  const route = searchQuery
+    ? `http://localhost:5001/api/products/search/${encodeURIComponent(
+        searchQuery
+      )}`
+    : collectionid === 'all'
+    ? `http://localhost:5001/api/products?sort=${sortOrder}`
+    : `http://localhost:5001/api/products/collection/${collectionid}?sort=${sortOrder}`;
+
+
+  console.log(`Fetching from route: ${route}`)
+
+  const { status, data, error } = useQuery<Product[]>(
+    ['products', collectionid, searchQuery, sortOrder], // Include sortOrder in queryKey
+    () => fetch(route).then((res) => res.json()), // Fetch function
+    {
+      enabled: !!collectionid || !!searchQuery, // Ensure query runs only when valid inputs exist
+    }
+  );
 
   if (status === 'loading') {
     return <span>Loading...</span>
@@ -23,20 +49,21 @@ export const ProductList = () => {
     return <span>Error</span>
   }
 
-  console.log(data[0].imagen)
-  console.log(data)
+  if (data.length === 0) {
+    return <span>No products found</span>
+  }
 
   return (
-    <div>
+    <div className="productList">
       {data.map((item) => (
-        <div key={item.id}>
-          <img
-            src={item.imagen}
-      
-          ></img>
-          <h1>{item.name}</h1>
-          <span>{item.description}</span>
-        </div>
+        <ProductCard
+          key={item.id}
+          id={item.id}
+          description={item.description}
+          name={item.name}
+          image={item.image}
+          price={item.price}
+        />
       ))}
     </div>
   )

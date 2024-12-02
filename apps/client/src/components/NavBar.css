@@ -1,0 +1,48 @@
+.navbar {
+    background-color: #333;
+    color: #fff;
+    padding: 0.8rem 1.5rem;
+        width: 100%;
+
+  }
+
+  .navbar-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 0 auto;
+    height: 80px;
+    width: 100%;
+  }
+  
+  .storeIcon{
+    width: 50px;
+    height: 70px;
+    margin-left: 50px;
+    margin-right: 50px;
+    padding: 10px;
+
+    transition: background-color 0.2s ease;
+    border-radius: 50px;
+  }
+
+    
+  .storeIcon:hover{
+    background-color: rgba(4, 75, 255, 0.323);
+  }
+
+  .search-input {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    font-size: 1rem;
+    border: 2px solid #ccc;
+    border-radius: 25px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+
+  .search-input:focus {
+    border-color: #f0a500;
+    outline: none;
+    box-shadow: 0 0 10px rgba(240, 165, 0, 0.8);
+  }
