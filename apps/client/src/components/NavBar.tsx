@@ -26,7 +26,7 @@ export const NavBar = ({ onSearch, onBack }: NavBarProps) => {
           <img
             src={img}
             alt="Store Icon"
-            className="store-icon"
+            className="storeIcon"
             onClick={onBack}
           />
         </Link>

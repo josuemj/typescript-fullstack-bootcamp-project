@@ -6,9 +6,24 @@
 
   .navbar-container {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
-    max-width: 1200px;
     margin: 0 auto;
     height: 80px;
+  }
+  
+  .storeIcon{
+    width: 50px;
+    height: 70px;
+    margin-left: 50px;
+    margin-right: 50px;
+    padding: 10px;
+
+    transition: background-color 0.2s ease;
+    border-radius: 50px;
+  }
+
+    
+  .storeIcon:hover{
+    background-color: rgba(4, 75, 255, 0.323);
   }
