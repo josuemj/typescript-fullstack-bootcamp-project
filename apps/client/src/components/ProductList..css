@@ -3,4 +3,6 @@
   display: flex;
   flex-direction: row;
   height: 100vh;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }

@@ -1,5 +1,4 @@
 import { useLocation, useNavigate } from 'react-router-dom';
-
 type VariantCardProps = {
   id: number;
   name: string;
