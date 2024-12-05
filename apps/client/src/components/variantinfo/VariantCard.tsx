@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 
-type VariantCardProps = {
+export type VariantCardProps = {
   id: number
   name: string
   image: string

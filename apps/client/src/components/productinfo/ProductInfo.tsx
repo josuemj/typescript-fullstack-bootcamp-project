@@ -3,7 +3,7 @@ import { useLocation, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { VariantList } from './VariantList';
 
-type ProductCardProps = {
+export type ProductCardProps = {
   id: number;
   description: string;
   name: string;

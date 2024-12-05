@@ -15,10 +15,15 @@
     "@commitlint/cli": "19.4.0",
     "@commitlint/config-conventional": "19.2.2",
     "@commitlint/types": "^19.0.3",
+    "@testing-library/dom": "^10.4.0",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.0.1",
     "babel-jest": "^29.7.0",
     "eslint": "8.57.0",
     "husky": "9.1.5",
+    "jest": "^29.7.0",
     "prettier": "3.3.2",
+    "supertest": "^7.0.0",
     "turbo": "2.0.14"
   },
   "volta": {
