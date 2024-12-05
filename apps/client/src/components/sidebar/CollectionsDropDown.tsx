@@ -1,4 +1,4 @@
-type Collection = {
+export type Collection = {
   collectionid: number
   name: string
   description: string
